@@ -51,7 +51,7 @@ def _object_etag(bucket: str, key: str) -> str | None:
         raise
 
 
-@st.cache_data(ttl=3600, show_spinner=False)
+@st.cache_data(ttl=300, show_spinner=True)
 def _fetch_s3_json_cached(bucket: str, key: str, etag: str) -> dict[str, Any] | None:
     try:
         obj = _client().get_object(Bucket=bucket, Key=key)

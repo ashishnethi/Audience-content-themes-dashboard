@@ -153,18 +153,11 @@ def _render_room_header(
     if tc is not None:
         total_signals += int(tc)
 
-    # Display both metrics
-    col1, col2 = st.columns(2)
-    with col1:
-        st.metric(
-            "Behavioral Signals",
-            _fmt_int(total_signals),
-        )
-    with col2:
-        st.metric(
-            "Profiles",
-            _fmt_int(profiles) if profiles is not None else "0",
-        )
+    # Display behavioral signals metric
+    st.metric(
+        "Behavioral Signals",
+        _fmt_int(total_signals),
+    )
 
     desc_summary = (desc or {}).get("summary") or (desc or {}).get("description")
     with st.expander("Room description", expanded=False):
@@ -540,11 +533,19 @@ def main() -> None:
     </div>
     """, unsafe_allow_html=True)
 
-    tab_r, tab_l = st.tabs(["Reddit", "LinkedIn"])
+    tab_r, tab_l, tab_t, tab_y, tab_m, tab_e = st.tabs(["Reddit", "LinkedIn", "Twitter", "YouTube", "Medium", "Enterprise Sources"])
     with tab_r:
         _render_platform_tab("reddit")
     with tab_l:
         _render_platform_tab("linkedin")
+    with tab_t:
+        st.markdown("**Work in Progress**")
+    with tab_y:
+        st.markdown("**Work in Progress**")
+    with tab_m:
+        st.markdown("**Work in Progress**")
+    with tab_e:
+        st.markdown("**Confidential - Will seek permission**")
 
 
 if __name__ == "__main__":
