@@ -1,0 +1,9 @@
+# Copy to rooms.yaml and fill in your audience rooms.
+# Each room lives under either reddit-audience or linkedin-audience in S3.
+
+rooms:
+  - room_id: "8d730b0e-f866-4508-a8cd-5565c7273949"
+    platform: reddit
+
+  - room_id: "d079945f-0be0-4f1a-aecb-acd8a985190c"
+    platform: reddit
