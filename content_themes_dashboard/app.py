@@ -110,6 +110,13 @@ _LAYOUT_CSS = """
         margin-top: 0.25rem;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     }
+    /* Hide Streamlit Cloud GitHub link */
+    .stDeployButton {
+        display: none !important;
+    }
+    [data-testid="stHeader"] {
+        display: none !important;
+    }
 </style>
 """
 
@@ -127,7 +134,7 @@ def _fmt_int(val: Any) -> str:
 
 def _render_room_header(
     name: str,
-    desc_summary: str | None,
+    desc: dict[str, Any] | None,
     platform: Platform,
     themes: dict[str, Any],
     signals: dict[str, Any] | None,
@@ -137,25 +144,81 @@ def _render_room_header(
     sig = (signals or {}).get("summary")
     if not isinstance(sig, dict):
         sig = {}
-    tp, tc = sig.get("total_posts"), sig.get("total_comments")
+    tp, tc, profiles = sig.get("total_posts"), sig.get("total_comments"), sig.get("total_profiles")
 
-    m1, m2 = st.columns(2)
-    with m1:
+    # Calculate behavioral signals (posts + comments)
+    total_signals = 0
+    if tp is not None:
+        total_signals += int(tp)
+    if tc is not None:
+        total_signals += int(tc)
+
+    # Display both metrics
+    col1, col2 = st.columns(2)
+    with col1:
         st.metric(
-            "Total posts",
-            _fmt_int(tp) if tp is not None else "—",
+            "Behavioral Signals",
+            _fmt_int(total_signals),
         )
-    with m2:
+    with col2:
         st.metric(
-            "Total comments",
-            _fmt_int(tc) if tc is not None else "—",
+            "Profiles",
+            _fmt_int(profiles) if profiles is not None else "0",
         )
 
+    desc_summary = (desc or {}).get("summary") or (desc or {}).get("description")
     with st.expander("Room description", expanded=False):
         if desc_summary and str(desc_summary).strip():
             st.text(str(desc_summary))
         else:
             st.caption("No summary in description.json for this room.")
+
+    # Display traits if available
+    if desc and isinstance(desc, dict) and desc.get("traits"):
+        traits = desc.get("traits")
+        if isinstance(traits, list) and traits:
+            st.subheader("Audience Traits")
+            
+            # Show traits in a single expander, one by one
+            with st.expander("View Audience Traits", expanded=False):
+                for i, trait in enumerate(traits):
+                    if isinstance(trait, dict):
+                        st.markdown(f"### {trait.get('title', f'Trait {i+1}')}")
+                        
+                        # Show only important keys in a clean layout
+                        keywords = trait.get('keywordTags', [])
+                        descriptions = trait.get('descriptions', [])
+                        behavioral = trait.get('behavioralImplications', [])
+                        biases = trait.get('decisionBiases', [])
+                        tension = trait.get('tensionAxis', '')
+                        position = trait.get('positionOnAxis', '')
+                        confidence = trait.get('confidenceScore', 0)
+                        
+                        # Display key information in requested order
+                        if descriptions:
+                            st.markdown("**Description:**")
+                            for desc in descriptions[:2]:  # Show first 2 descriptions
+                                st.write(f"· {desc}")
+                        
+                        if keywords:
+                            st.markdown("**Keywords:** " + ", ".join(keywords))
+                        
+                        if behavioral:
+                            st.markdown("**Behavioral Implications:**")
+                            for imp in behavioral[:2]:  # Show first 2 implications
+                                st.write(f"· {imp}")
+                        
+                        if biases:
+                            st.markdown("**Decision Biases:**")
+                            for bias in biases[:2]:  # Show first 2 biases
+                                st.write(f"· {bias}")
+                        
+                        if tension and position:
+                            st.markdown(f"**Position:** {position} on {tension}")
+                        
+                        # Add separator between traits
+                        if i < len(traits) - 1:
+                            st.divider()
 
 
 def _theme_chart(df: pd.DataFrame) -> None:
@@ -385,7 +448,7 @@ def _render_platform_tab(platform: Platform) -> None:
             key_override=hkey if isinstance(hkey, str) else None,
         )
 
-    _render_room_header(name, summary, platform, themes, signals)
+    _render_room_header(name, desc, platform, themes, signals)
 
     cats = themes.get("categories") or {}
     order = category_order_for_platform(platform)
@@ -414,7 +477,10 @@ def _render_platform_tab(platform: Platform) -> None:
             "`content_themes_highlights.json`, or use a v1 `content_themes.json` with samples."
         )
 
-    for slug in order:
+    # Sort themes by percentage (highest to lowest) for examples
+    sorted_themes = sorted(order, key=lambda slug: float(cats.get(slug) or 0), reverse=True)
+    
+    for slug in sorted_themes:
         pct = cats.get(slug)
         label = pretty.get(slug, slug)
         title = f"{label} — {pct}%" if pct is not None else label
@@ -424,7 +490,7 @@ def _render_platform_tab(platform: Platform) -> None:
         else:
             posts, comments = _legacy_samples_v1(themes, slug)
 
-        with st.expander(title, expanded=(slug == order[0])):
+        with st.expander(title, expanded=False):
             if not posts and not comments:
                 st.caption("No examples in this category.")
                 continue
@@ -440,12 +506,10 @@ def _render_platform_tab(platform: Platform) -> None:
                     st.caption("Pipeline stores posts only; unexpected comment entries below.")
                     for it in comments:
                         _render_sample_block(it, platform)
-            elif comments:
+            elif platform != "reddit" and comments:
                 st.markdown("**Comments**")
                 for it in comments:
                     _render_sample_block(it, platform)
-            elif platform == "reddit" and posts:
-                st.caption("No comments in this category in highlights.")
 
 
 def main() -> None:
@@ -462,7 +526,7 @@ def main() -> None:
         </div>
         <div>
             <div class="vectorial-text">VECTORIAL</div>
-            <div class="dashboard-title">Audience Room Content Themes</div>
+            <div class="dashboard-title">Audience Room Data Insights by sources</div>
         </div>
     </div>
     """, unsafe_allow_html=True)

@@ -21,7 +21,7 @@ LINKEDIN_CATEGORY_LABELS: dict[str, str] = {
     "pain_points": "Pain points",
     "solutions_learnings": "Solutions & learnings",
     "workflows_how_to": "Workflows & how-to",
-    "new_tech_trends": "New tech & trends",
+    "new_tech_trends": "New tech & trends Adaption",
     "opinions_insights": "Opinions & insights",
 }
 
