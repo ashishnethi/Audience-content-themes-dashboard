@@ -177,7 +177,7 @@ def _render_room_header(
     if desc and isinstance(desc, dict) and desc.get("traits"):
         traits = desc.get("traits")
         if isinstance(traits, list) and traits:
-            st.subheader("Audience Traits")
+            st.subheader("Learned behaviour traits of Audience (From SAPIENS)")
             
             # Show traits in a single expander, one by one
             with st.expander("View Audience Traits", expanded=False):
@@ -416,7 +416,12 @@ def _render_platform_tab(platform: Platform) -> None:
         )
 
     options = [r["room_id"] for r in subset]
-    display = [desc_data[rid] for rid in options]
+    display = []
+    for rid in options:
+        name = desc_data[rid]
+        if rid == "52f82e3d-65eb-43f9-bc52-b5baaa67e54f":
+            name = f"Womens health {name}"
+        display.append(name)
 
     idx = st.selectbox(
         "Audience room",
@@ -431,6 +436,9 @@ def _render_platform_tab(platform: Platform) -> None:
     signals = load_signals_breakdown(platform, room_id)
 
     name = desc_data[room_id]
+    # Add "Womens health" prefix for specific room
+    if room_id == "52f82e3d-65eb-43f9-bc52-b5baaa67e54f":
+        name = f"Womens health {name}"
     summary = (desc or {}).get("summary") or (desc or {}).get("description")
 
     if not themes:
