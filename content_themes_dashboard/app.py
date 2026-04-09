@@ -196,21 +196,22 @@ def _render_room_header(
                         
                         # Display key information in requested order
                         if descriptions:
-                            st.markdown("**Description:**")
-                            for desc in descriptions[:2]:  # Show first 2 descriptions
+                            st.markdown(f"**Description:** ")
+                            for desc in descriptions:  # Show all descriptions
                                 st.write(f"· {desc}")
                         
                         if keywords:
-                            st.markdown("**Keywords:** " + ", ".join(keywords))
+                            st.markdown(f"**Keywords:** ({len(keywords)} items)")
+                            st.write(", ".join(keywords))
                         
                         if behavioral:
-                            st.markdown("**Behavioral Implications:**")
-                            for imp in behavioral[:2]:  # Show first 2 implications
+                            st.markdown(f"**Behavioral Implications:** ({len(behavioral)} items)")
+                            for imp in behavioral:  # Show all implications
                                 st.write(f"· {imp}")
                         
                         if biases:
-                            st.markdown("**Decision Biases:**")
-                            for bias in biases[:2]:  # Show first 2 biases
+                            st.markdown(f"**Decision Biases:** ({len(biases)} items)")
+                            for bias in biases:  # Show all biases
                                 st.write(f"· {bias}")
                         
                         if tension and position:
