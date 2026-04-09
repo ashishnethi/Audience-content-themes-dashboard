@@ -201,7 +201,7 @@ def _render_room_header(
                                 st.write(f"· {desc}")
                         
                         if keywords:
-                            st.markdown(f"**Keywords:** ({len(keywords)} items)")
+                            st.markdown(f"**Keywords:** ")
                             st.write(", ".join(keywords))
                         
                         if behavioral:
