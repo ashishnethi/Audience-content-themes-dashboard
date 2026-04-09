@@ -60,6 +60,56 @@ _LAYOUT_CSS = """
         font-size: 0.95rem !important;
         font-weight: 500 !important;
     }
+    /* Custom header styling */
+    .custom-header {
+        display: flex;
+        align-items: center;
+        margin-bottom: 2rem;
+        padding: 1rem 0;
+    }
+    .vectorial-icon {
+        width: 40px;
+        height: 40px;
+        margin-right: 15px;
+        position: relative;
+    }
+    .diamond {
+        position: absolute;
+        width: 16px;
+        height: 16px;
+        background-color: #ff6b35;
+        transform: rotate(45deg);
+    }
+    .diamond-top-left {
+        top: 0;
+        left: 0;
+    }
+    .diamond-top-right {
+        top: 0;
+        right: 0;
+    }
+    .diamond-bottom-left {
+        bottom: 0;
+        left: 0;
+    }
+    .diamond-bottom-right {
+        bottom: 0;
+        right: 0;
+    }
+    .vectorial-text {
+        font-size: 2rem;
+        font-weight: 700;
+        color: #ff6b35;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        margin: 0;
+    }
+    .dashboard-title {
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: #666;
+        margin-top: 0.25rem;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    }
 </style>
 """
 
@@ -401,8 +451,21 @@ def _render_platform_tab(platform: Platform) -> None:
 def main() -> None:
     _css()
     
-    # Main page title
-    st.title("Audience Room Content Themes")
+    # Custom header with VECTORIAL icon and branding
+    st.markdown("""
+    <div class="custom-header">
+        <div class="vectorial-icon">
+            <div class="diamond diamond-top-left"></div>
+            <div class="diamond diamond-top-right"></div>
+            <div class="diamond diamond-bottom-left"></div>
+            <div class="diamond diamond-bottom-right"></div>
+        </div>
+        <div>
+            <div class="vectorial-text">VECTORIAL</div>
+            <div class="dashboard-title">Audience Room Content Themes</div>
+        </div>
+    </div>
+    """, unsafe_allow_html=True)
 
     tab_r, tab_l = st.tabs(["Reddit", "LinkedIn"])
     with tab_r:
