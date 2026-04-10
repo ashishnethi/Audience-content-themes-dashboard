@@ -34,6 +34,8 @@ from s3_data import (
     load_description,
     load_signals_breakdown,
 )
+from story_analysis_dashboard import render_qualitative_story_report
+from telemetry_dashboard import render_telemetry_report
 
 load_dotenv(Path(__file__).resolve().parent.parent / ".env")
 
@@ -575,7 +577,16 @@ def main() -> None:
     # with tab_m:
     #     _render_platform_tab("medium")
     with tab_e:
-            st.markdown("**Confidential - Will seek permission**")
+        sub_telemetry, sub_story = st.tabs(
+            [
+                "Telemetry report",
+                "Qualititative story analysis",
+            ]
+        )
+        with sub_telemetry:
+            render_telemetry_report()
+        with sub_story:
+            render_qualitative_story_report()
 
 
 if __name__ == "__main__":
