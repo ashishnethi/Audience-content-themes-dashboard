@@ -575,7 +575,7 @@ def main() -> None:
     # with tab_m:
     #     _render_platform_tab("medium")
     with tab_e:
-        _render_platform_tab("enterprise")
+            st.markdown("**Confidential - Will seek permission**")
 
 
 if __name__ == "__main__":
