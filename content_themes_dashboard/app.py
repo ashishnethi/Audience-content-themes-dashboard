@@ -411,10 +411,20 @@ def _render_platform_tab(platform: Platform) -> None:
 
     options = [r["room_id"] for r in subset]
     display = []
+    custom_names = {
+        "52f82e3d-65eb-43f9-bc52-b5baaa67e54f": "Womens Health Perimeno in US",
+        "d079945f-0be0-4f1a-aecb-acd8a985190c": "Gaming Kingshot in US",
+        "d2df3b80-642c-47cf-b764-2a71eef458b4": "Housing- Urban Buyers in India",
+        "4dc6850a-027f-45d3-9b96-5140dbcbae36": "Backend Engineer in US"
+    }
+    
     for rid in options:
         name = desc_data[rid]
-        if rid == "52f82e3d-65eb-43f9-bc52-b5baaa67e54f":
-            name = f"Womens health {name}"
+        if rid in custom_names:
+            name = custom_names[rid]
+        # Add "in US" to all LinkedIn room names in display
+        elif rid in [r["room_id"] for r in subset if r["platform"] == "linkedin"]:
+            name = f"{name} in US"
         display.append(name)
 
     idx = st.selectbox(
@@ -430,9 +440,19 @@ def _render_platform_tab(platform: Platform) -> None:
     signals = load_signals_breakdown(platform, room_id)
 
     name = desc_data[room_id]
-    # Add "Womens health" prefix for specific room
-    if room_id == "52f82e3d-65eb-43f9-bc52-b5baaa67e54f":
-        name = f"Womens health {name}"
+    # Custom names for specific room IDs
+    custom_names = {
+        "52f82e3d-65eb-43f9-bc52-b5baaa67e54f": "Womens Health Perimeno in US",
+        "d079945f-0be0-4f1a-aecb-acd8a985190c": "Gaming Kingshot in US",
+        "d2df3b80-642c-47cf-b764-2a71eef458b4": "Housing- Urban Buyers in India",
+        "4dc6850a-027f-45d3-9b96-5140dbcbae36": "Backend Engineer in US"
+    }
+    
+    if room_id in custom_names:
+        name = custom_names[room_id]
+    # Add "in US" to all LinkedIn room names
+    elif platform == "linkedin":
+        name = f"{name} in US"
     summary = (desc or {}).get("summary") or (desc or {}).get("description")
 
     if not themes:

@@ -2,10 +2,10 @@
 # Each room lives under either reddit-audience or linkedin-audience in S3.
 
 rooms:
-  - room_id: "d079945f-0be0-4f1a-aecb-acd8a985190c"
+  - room_id: "52f82e3d-65eb-43f9-bc52-b5baaa67e54f"
     platform: reddit
 
-  - room_id: "52f82e3d-65eb-43f9-bc52-b5baaa67e54f"
+  - room_id: "d079945f-0be0-4f1a-aecb-acd8a985190c"
     platform: reddit
 
   - room_id: "d2df3b80-642c-47cf-b764-2a71eef458b4"
