@@ -562,19 +562,20 @@ def main() -> None:
     </div>
     """, unsafe_allow_html=True)
 
-    tab_r, tab_l, tab_t, tab_y, tab_m, tab_e = st.tabs(["Reddit", "LinkedIn", "Twitter", "YouTube", "Medium", "Enterprise Sources"])
+    tab_r, tab_l, tab_e = st.tabs(["Reddit", "LinkedIn", "Enterprise Sources"])
     with tab_r:
         _render_platform_tab("reddit")
     with tab_l:
         _render_platform_tab("linkedin")
-    with tab_t:
-        st.markdown("**Work in Progress**")
-    with tab_y:
-        st.markdown("**Work in Progress**")
-    with tab_m:
-        st.markdown("**Work in Progress**")
+    # Temporarily commented out tabs
+    # with tab_t:
+    #     _render_platform_tab("twitter")
+    # with tab_y:
+    #     _render_platform_tab("youtube")
+    # with tab_m:
+    #     _render_platform_tab("medium")
     with tab_e:
-        st.markdown("**Confidential - Will seek permission**")
+        _render_platform_tab("enterprise")
 
 
 if __name__ == "__main__":
