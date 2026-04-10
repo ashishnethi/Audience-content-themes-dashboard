@@ -434,6 +434,15 @@ def _render_platform_tab(platform: Platform) -> None:
         key=f"room_pick_{platform}",
     )
     room_id = options[idx]
+    
+    # Tribal segmentation explanation
+    st.markdown("""
+    <div style="padding: 10px 0; margin-bottom: 20px; border-left: 3px solid #ff6b35; padding-left: 15px; background-color: #f8f9fa; border-radius: 5px;">
+        <p style="margin: 0; color: #333; font-size: 14px;">
+        <strong>Audience Tribes:</strong> The audience can be further sliced and into different tribes based on demographics that's inferred from individual user profile data
+        </p>
+    </div>
+    """, unsafe_allow_html=True)
 
     desc = load_description(platform, room_id)
     themes = load_content_themes(platform, room_id)
@@ -518,7 +527,7 @@ def _render_platform_tab(platform: Platform) -> None:
                 continue
 
             if posts:
-                st.markdown("**Posts**")
+                st.markdown("**Sample Posts**")
                 for it in posts:
                     _render_sample_block(it, platform)
 
