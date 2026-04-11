@@ -123,6 +123,128 @@
                 }
               }
             ]
+          },
+        
+        {
+            "category_name": "Landing Page",
+            "summary": {
+              "total_sessions": 31,
+              "unique_patterns": 2,
+              "analysis": [
+                "The Landing Page serves as the primary strategic entry point for 'Knowledge Extraction,' with 70% of new users starting their session here to map complex system architecture.",
+                "Significant engagement with AI-generated 'Deep Wiki' pages suggests that engineers are leveraging the platform to bridge the gap between legacy code and current requirements without manual code-tracing.",
+                "Real-time 'Freshness' alerts are driving proactive maintenance, with senior leads using the landing page to identify and prune technical debt in the documentation before it impacts productivity.",
+                "Architecture diagrams are the highest-retention elements on this page, serving as the visual 'Single Source of Truth' for cross-team alignment and architectural discovery."
+              ]
+            },
+            "behavioral_patterns": [
+              {
+                "title": "Reference-Led Development",
+                "segment": "Core Developers",
+                "description": "Engineers using the documentation landing page as a live side-bar reference while executing complex code changes to ensure architectural alignment.",
+                "occurrences": 22,
+                "affected_users": 15
+              },
+              {
+                "title": "Architectural Discovery",
+                "segment": "New Hires & Stakeholders",
+                "description": "High-intensity sessions focused on exploring the visual dependency maps to build a mental model of the ecosystem during onboarding or refactoring.",
+                "occurrences": 9,
+                "affected_users": 6
+              }
+            ],
+            "sessions": [
+              {
+                "id": "L-601",
+                "insight": "Knowledge Extraction",
+                "summary": "User utilized the 'Deep Wiki' to decipher a legacy authentication module.",
+                "deep_dive": {
+                  "duration_metrics": "9 interactions over 7.4 minutes",
+                  "analysis_prose": "The session initiated on the Landing Page's global search bar. The user entered 'Auth-Legacy-Flow' and was immediately directed to an AI-generated Deep Wiki page. The user spent the first 4 minutes in 'Deep Reading' mode, specifically focusing on the 'Logic Origin' section which explained a series of undocumented 2022 commits involving a proprietary encryption wrapper. Interaction logs show the user expanded the 'Disproved Assumptions' toggle to see why a standard JWT approach was bypassed. Following this, the user utilized the 'Trace to Code' feature to jump directly to the specific line in the repository. This session illustrates the platform's ability to act as the 'Digital Memory' of the team, preventing hours of manual code-tracing and eliminating the need for a 'fire-drill' Slack thread to find the original author of the code."
+                }
+              },
+              {
+                "id": "L-602",
+                "insight": "Hygiene Audit",
+                "summary": "User updated an outdated README identified by a system 'Stale' alert.",
+                "deep_dive": {
+                  "duration_metrics": "14 interactions over 10.1 minutes",
+                  "analysis_prose": "Upon landing on the documentation dashboard, the user was immediately drawn to a high-priority 'Freshness Alert' on the Payment-Gateway directory. The system's intelligence engine had flagged a 15% semantic drift between the current API schema and the written guide. The user spent 6 minutes in a side-by-side comparison view, auditing the AI-suggested text updates which included new error code definitions and rate-limiting parameters. The user spent an additional 3 minutes checking the 'Downstream Impact' report to see which other teams were relying on this documentation. The session concluded with a 'Publish' event that synchronized the docs with the live production code. This represents a proactive 'Documentation-as-Code' workflow that ensures the knowledge base remains a living asset rather than a stale liability."
+                }
+              },
+              {
+                "id": "L-603",
+                "insight": "Visual Blueprint Mapping",
+                "summary": "User spent 5 minutes analyzing the 'Service Dependency' graph.",
+                "deep_dive": {
+                  "duration_metrics": "6 interactions over 5.2 minutes",
+                  "analysis_prose": "User focused exclusively on the interactive SVG-based architecture map available on the landing page. By filtering for 'Critical Path' services, the user spent 3 minutes tracing the synchronous flow of an order-event from the frontend gateway to the downstream billing database. During this trace, the user utilized the 'Zoom-to-Context' feature on a specific microservice call, revealing a redundant validation step that was not documented in any text-based README. The user's behavior—frequent hovering over call-path latencies and dependency counts—indicates an architectural audit intended to optimize system performance. The session highlights how visual landing pages can surface deep architectural flaws and 'hidden' dependencies that remain completely invisible during traditional raw code reviews or text searches."
+                }
+              },
+              {
+                "id": "L-604",
+                "insight": "Knowledge Extraction",
+                "summary": "Mirroring L-601: New hire using AI-docs to navigate the Billing Engine.",
+                "deep_dive": {
+                  "duration_metrics": "7 interactions over 6.8 minutes",
+                  "analysis_prose": "Continuing the high-value pattern of automated onboarding, a recently hired developer (User #442) accessed the Landing Page to locate the 'Invariants' for the core billing service. The user spent 3 minutes on the 'Common Failure Modes' section, specifically reading an AI-generated summary of historical race conditions that have occurred in this module. Interaction data shows the user then toggled the 'Annotated Code' view to see the documentation inline with the source. The session demonstrates that the Landing Page effectively acts as an 'Automated Mentor,' providing the deep historical context and 'gotchas' that a new hire would typically need a multi-hour meeting to obtain from a senior lead. This drastically reduces the 'Time-to-Productivity' for the engineering organization."
+                }
+              },
+              {
+                "id": "L-605",
+                "insight": "Just-in-Time Reference",
+                "summary": "Quick look at the API Endpoint signature during a coding task.",
+                "deep_dive": {
+                  "duration_metrics": "3 interactions over 1.2 minutes",
+                  "analysis_prose": "This was a high-velocity 'Reference' session. The user landed on the Documentation landing page, utilized the 'Instant Search' for the '/v1/users/update' endpoint, and copied the JSON response schema directly to their clipboard. The session data shows the user spent only 15 seconds on the page before exiting, which—in the context of developer productivity—is a success metric. It proves the Landing Page's utility as a high-speed developer utility tool where the 'Time-to-Information' is minimized, preventing the cognitive load of searching through scattered Notion pages or stale Confluence folders. The efficiency of this session reinforces the platform's role as the primary technical interface for the team."
+                }
+              },
+              {
+                "id": "L-606",
+                "insight": "Code Archeology",
+                "summary": "User spent 8 minutes deciphering 'Uncommented Code' via the wiki.",
+                "deep_dive": {
+                  "duration_metrics": "5 interactions over 8.5 minutes",
+                  "analysis_prose": "The user utilized the 'Trace Origins' feature on a legacy file with zero human-written comments. The Landing Page generated a 500-word 'Business Intent' summary for the file on-demand. The user spent 6 minutes absorbing the 'Functional Roadmap' provided by the AI, which identified the file's primary responsibility as a legacy data-migration bridge. The interaction data shows zero navigation to other files, suggesting the user was solely focused on 'Mental Model Construction.' This is a high-value session that proves the tool's worth in maintenance and refactoring tasks where the original authors have left the company, successfully extracting years of 'lost' human knowledge into a readable, actionable format in under 10 minutes."
+                }
+              },
+              {
+                "id": "L-607",
+                "insight": "Visual Blueprint Mapping",
+                "summary": "Mirroring L-603: Lead auditing resource allocation via maps.",
+                "deep_dive": {
+                  "duration_metrics": "8 interactions over 4.9 minutes",
+                  "analysis_prose": "A consistency check on architectural auditing. Similar to L-603, the user focused on the 'Database Schema' visualization. They spent 3 minutes tracing 'Foreign Key' relationships that were recently refactored in a separate PR. The user used the 'Compare with Last Stable' toggle to visually see how the schema had evolved over the last month. This recurring visual audit behavior is a key signal of platform stickiness; the user is relying on the Landing Page's graphical intelligence to verify that the physical database structure matches the intended architectural design, ensuring no 'drift' has occurred during the rapid development cycle."
+                }
+              },
+              {
+                "id": "L-608",
+                "insight": "Hygiene Audit",
+                "summary": "Mirroring L-602: User cleaning up dead links in the handbook.",
+                "deep_dive": {
+                  "duration_metrics": "10 interactions over 6.2 minutes",
+                  "analysis_prose": "Following a 'Dead Link' notification on the Landing Page's health dashboard, the user reviewed 5 broken internal links in the 'Deployment Handbook.' The user spent 4 minutes validating new target URLs and using the 'Auto-Fix' feature to update the references. The user also checked the 'Usage Heatmap' for the page to see if any new hires had been misled by the broken links earlier in the day. This session reinforces the 'Self-Healing Documentation' pattern, where the platform incentivizes developers to keep the knowledge base clean by making the maintenance process nearly frictionless and highlighting the direct impact of documentation quality on team onboarding."
+                }
+              },
+              {
+                "id": "L-609",
+                "insight": "Checklist-Based Deploy",
+                "summary": "User keeping Environment guide open during a production release.",
+                "deep_dive": {
+                  "duration_metrics": "18 interactions over 15.0 minutes",
+                  "analysis_prose": "This session shows the Landing Page being used as a critical safety net during a high-stakes event. The user kept the 'Production Deployment Checklist' open for the entire duration of a major release. Multiple 'Copy' events for various environment variable keys and shell commands were recorded. The long duration and frequent small scrolls indicate the documentation was being used as the literal 'Script' for the release, providing step-by-step guidance. This is a primary use-case for documentation; the Landing Page successfully prevented potential manual configuration errors in a live environment by serving as a highly accessible, reliable source of operational truth during a mission-critical window."
+                }
+              },
+              {
+                "id": "L-610",
+                "insight": "Knowledge Extraction",
+                "summary": "User asking the AI to 'Summarize Folder' for a quick architecture overview.",
+                "deep_dive": {
+                  "duration_metrics": "5 interactions over 3.4 minutes",
+                  "analysis_prose": "User arrived at a complex 'Infrastructure' folder containing hundreds of Terraform files. Instead of performing a manual crawl, they triggered the 'Folder Summary' tool on the Landing Page. The system generated a multi-layered overview of the modules, identifying the primary ingress points and security groups. The user spent 3 minutes reading the summary and clicked on the two 'High Impact' files identified by the AI. This demonstrates the Landing Page's role as a 'Cognitive Accelerator,' allowing a developer to gain a comprehensive understanding of a massive technical sub-system in minutes rather than hours, effectively acting as a search engine for architectural intent."
+                }
+              }
+            ]
           }
      ]
     }
